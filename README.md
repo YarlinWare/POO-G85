@@ -6,7 +6,7 @@ Programación Orientada a Objetos Grupo 85
 ### Contenido
 
 - Calculadora.
-
+- Cronómetro
 
  
 Integrantes  | Codigo
