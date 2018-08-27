@@ -1,0 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package calculadora.logica;
+
+/**
+ *
+ * @author Estudiantes
+ */
+public class CalculadoraOctal extends Calculadora{
+    public CalculadoraOctal() {
+        this.base = 8;
+    }
+    
+    @Override
+    public String mostrarResultado(){
+        return Integer.toOctalString(super.getResultado());
+    }
+    
+    @Override
+    public String mostrarValor1() {
+        return Integer.toOctalString(super.getValor1());
+    }
+
+    @Override
+    public String mostrarValor2() {
+        return Integer.toOctalString(super.getValor2());
+    }
+}
