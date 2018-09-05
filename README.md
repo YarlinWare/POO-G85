@@ -6,10 +6,11 @@ Programación Orientada a Objetos Grupo 85
 ### Contenido
 
 - Calculadora.
-
+- Cronómetro.
+- Figuras Geométricas.
 
  
 Integrantes  | Codigo
 ------------- | -------------
-Juan Felipe  | 20181020077
-Cristhian M.  | 20181020081
+Juan Felipe Herrera Poveda | 20181020077
+Cristhian Mauricio Yara Pardo  | 20181020081
