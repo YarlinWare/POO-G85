@@ -5,7 +5,10 @@
  */
 package cronometro;
 import cronometro.Tiempo;
+<<<<<<< HEAD
 import java.util.Scanner;
+=======
+>>>>>>> 80b785a6dea27b580a88295f106beec5537d0ebe
 /**
  *
  * @author Rapter
@@ -15,6 +18,7 @@ public class Cronometro {
     /**
      * @param args the command line arguments
      */
+<<<<<<< HEAD
     public static void main(String[] args)throws InterruptedException {
         Tiempo time = new Tiempo();
         Scanner sc = new Scanner(System.in);
@@ -45,6 +49,11 @@ public class Cronometro {
                      break;
         }
         
+=======
+    public static void main(String[] args) {
+        Tiempo time = new Tiempo();
+        time.Iniciar();
+>>>>>>> 80b785a6dea27b580a88295f106beec5537d0ebe
         
     }
     

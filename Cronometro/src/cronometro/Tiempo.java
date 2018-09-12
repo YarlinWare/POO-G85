@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 package cronometro;
 
@@ -10,6 +11,25 @@ public class Tiempo {
         while(diezmilesima>-1){
         if(diezmilesima==9 ){
             Thread.sleep(2);
+=======
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cronometro;
+
+/**
+ *
+ * @author Rapter
+ */
+public class Tiempo {
+    int hora =0,minuto=0,segundo=0,decima=0,centesima=0,milesima=0, diezmilesima;
+    
+    public void Iniciar(){
+        while(diezmilesima>-1){
+        if(diezmilesima==9 ){
+>>>>>>> 80b785a6dea27b580a88295f106beec5537d0ebe
             diezmilesima=0;
             milesima++;        
             if(milesima==9 ){
@@ -52,6 +72,7 @@ public class Tiempo {
     public void Pausar(){
         
     }
+<<<<<<< HEAD
     
     public void Reanudar(int h, int m, int s)throws InterruptedException {
         hora=0;
@@ -159,6 +180,9 @@ public class Tiempo {
     }
     
     public void Reanudar2()throws InterruptedException{
+=======
+    public void Reanudar(){
+>>>>>>> 80b785a6dea27b580a88295f106beec5537d0ebe
         hora =hora;
         minuto=minuto;
         segundo=segundo;
@@ -166,10 +190,16 @@ public class Tiempo {
         centesima=centesima;
         milesima=milesima; 
         diezmilesima=diezmilesima;
+<<<<<<< HEAD
         long start = System.currentTimeMillis();
         while(diezmilesima>-1){
         if(diezmilesima==9 ){
             Thread.sleep(2);
+=======
+        
+        while(diezmilesima>-1){
+        if(diezmilesima==9 ){
+>>>>>>> 80b785a6dea27b580a88295f106beec5537d0ebe
             diezmilesima=0;
             milesima++;        
             if(milesima==9 ){
@@ -224,6 +254,7 @@ public class Tiempo {
         
     }
     public void Detener(){
+<<<<<<< HEAD
         System.out.println(hora+":"+minuto+":"+segundo+":"+":"+decima+":"+centesima+":"+milesima+":"+diezmilesima);        
     }
     public void Reversa() throws InterruptedException
@@ -281,5 +312,8 @@ public class Tiempo {
             System.out.println(hora+":"+minuto+":"+segundo+":"+":"+decima+":"+centesima+":"+milesima+":"+diezmilesima);
 
         }
+=======
+        System.out.println(hora+":"+minuto+":"+segundo+":"+""+decima+""+centesima+""+milesima+""+diezmilesima);        
+>>>>>>> 80b785a6dea27b580a88295f106beec5537d0ebe
     }
 }
