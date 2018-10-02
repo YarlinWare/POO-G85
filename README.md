@@ -6,12 +6,11 @@ Programación Orientada a Objetos Grupo 85
 ### Contenido
 
 - Calculadora.
-<<<<<<< HEAD
-- Cronómetro
-=======
 - Cronómetro.
 - Figuras Geométricas.
->>>>>>> 80b785a6dea27b580a88295f106beec5537d0ebe
+- Agenda.
+
+
 
  
 Integrantes  | Codigo
