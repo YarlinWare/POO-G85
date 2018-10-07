@@ -62,7 +62,8 @@ public class DBContactos {
         }
             return data;
         }
-        public int insertarContacto(Contacto c){
+    
+    public int insertarContacto(Contacto c){
             int cont_usuario = -1;
             int resultado = 0;//no hubo errores de validacion
             try{
