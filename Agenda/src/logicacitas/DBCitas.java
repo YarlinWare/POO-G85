@@ -107,4 +107,21 @@ public class DBCitas {
         }
         return resultado;
     }
+
+    public int actualizarCita(Citas cts) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public int borrarCita(Citas c){
+        int resultado = 0;
+        try{
+            PreparedStatement pstm = cn.getConexion().prepareStatement("delete from citas " +
+            " where con_id = ?");
+            pstm.setInt(1, c.getId());
+            resultado = pstm.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+            return resultado;
+        }
 }
