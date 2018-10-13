@@ -19,6 +19,8 @@ public class Citas {
     String lugar;
     Date fecha;
     Time hora;
+    String fecha2;
+    String hora2;
     String descripcion;
 
     public void setId(int id) {
@@ -75,6 +77,22 @@ public class Citas {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getFecha2() {
+        return fecha2;
+    }
+
+    public String getHora2() {
+        return hora2;
+    }
+
+    public void setFecha2(String fecha2) {
+        this.fecha2 = fecha2;
+    }
+
+    public void setHora2(String hora2) {
+        this.hora2 = hora2;
     }
     
 }

@@ -346,6 +346,10 @@ public class FormAgenda implements ActionListener{
                     textLugar.setText(citas[i].getLugar());
                     /*textFecha.setText(citas[i].getFecha());
                     textHora.setText(citas[i].getHora());*/
+                    
+                    textFecha.setText(citas[i].getFecha2());
+                    textHora.setText(citas[i].getHora2());
+                    
                     textDescripcion.setText(citas[i].getDescripcion());
                     
                     }
@@ -584,6 +588,8 @@ public class FormAgenda implements ActionListener{
             cts.setLugar(textLugar.getText());
             /*cts.setFecha(textFecha.getText());
             cts.setHora(textHora.getText());*/
+            cts.setFecha2(textFecha.getText());
+            cts.setHora2(textHora.getText());
             cts.setDescripcion(textDescripcion.getText());
             int r = dbcitas.insertarCitas(cts);
             if(r>0){
@@ -598,6 +604,8 @@ public class FormAgenda implements ActionListener{
             cts.setLugar(textLugar.getText());
             /*cts.setFecha(textFecha.getText());
             cts.setHora(textHora.getText());*/
+            cts.setFecha2(textFecha.getText());
+            cts.setHora2(textHora.getText());
             cts.setDescripcion(textDescripcion.getText());
             int r = dbcitas.actualizarCita(cts);
             if(r>0){
