@@ -31,6 +31,8 @@ public class Agenda {
             System.out.println("Persona: " + cita.getNombre()+ "\tLugar: " + cita.getLugar()+ "\tFecha: " + cita.getFecha()+ "\tHora: " + cita.getHora()+ "\tDescripcion: " + cita.getDescripcion());
         }   
         System.out.println("\n\n");
+        FormAgenda formA = new FormAgenda();
     }
+    
 }
 

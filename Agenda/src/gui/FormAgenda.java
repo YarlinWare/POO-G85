@@ -6,30 +6,52 @@ import java.awt.event.*;
 import javax.swing.*;
 import logica.DBContactos;
 import logica.Contacto;
+import logicacitas.DBCitas;
+import logicacitas.Citas;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.JComboBox;
+/*
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+*/
 public class FormAgenda implements ActionListener{
     JFrame frame;
     JPanel panel;
     JMenuBar menuBar;
     JMenu menu, subMenu;
     JMenuItem menuItem;
-    JScrollPane scrollPanel;
-    DefaultTableModel modeloTabla;
-    JTable tablaContactos;
+    JScrollPane scrollPanel,scrollPanel2;
+    DefaultTableModel modeloTabla, modeloTablaCita;
+    JTable tablaContactos, tablaCitas;
     JTabbedPane pestana;
     Container panelInformacion,panelCitas;
     JLabel labelId,labelNombre,labelApellido,labelTelefonoDomicilio,
     labelTelefonoOficina,labelDireccionDomicilio,labelDireccionOficina,
     labelCelular,labelCorreo;
+    
+    JLabel labelIdCita,labelPersona,labelLugar,labelFecha,labelHora, labelDescripcion;
+        
     JTextField textId,textNombre,textApellido,textTelefonoDomicilio,textTelefonoOficina,
     textDireccionDomicilio,textDireccionOficina,textCelular,textCorreo;
+    
+    JTextField textIdCita, textPersona, textLugar, textFecha,textHora;
+    JTextArea textDescripcion;    
+    
     JButton botonNuevoContacto,botonGuardarContacto,botonEditarContacto,botonBorrarContacto;
 
+    JButton botonNuevaCita,botonGuardarCita,botonEditarCita,botonBorrarCita;
+   
+
+      
     DBContactos dbc = new DBContactos();
+    DBCitas dbcitas = new DBCitas();
+    Citas[] citas;
     Contacto[] contactos;
     int estado=0;
+    int estado_cita=0;
     int fila;
+    
     public FormAgenda() {
         initComponents();
     }
@@ -46,7 +68,19 @@ public class FormAgenda implements ActionListener{
         menuItem = new JMenuItem("Salir");
         menuItem.addActionListener(this);
         menu.add(menuItem);
-
+        menuItem = new JMenuItem("Borrar");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        
+        menu = new JMenu("Tablas");
+        menuBar.add(menu);
+        menuItem = new JMenuItem("Contactos");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menuItem = new JMenuItem("Citas");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        
         panelInformacion = new JPanel(null);
         panelInformacion.setLayout(null);
         panelCitas = new JPanel(null);
@@ -61,14 +95,15 @@ public class FormAgenda implements ActionListener{
         int labelAlto = 20;
         int textAncho = 200;
         int textAlto = 20;
+
         labelId = new JLabel("Id");
         labelId.setBounds(x,y,20,20);
         panelInformacion.add(labelId);
-
+        
         textId = new JTextField();
         textId.setBounds(x+30,y,50,20);
         panelInformacion.add(textId);
-
+        
         y+=30;
         labelNombre = new JLabel("Nombre",SwingConstants.RIGHT);
         labelNombre.setBounds(x,y,labelAncho,labelAlto);
@@ -155,7 +190,7 @@ public class FormAgenda implements ActionListener{
         botonBorrarContacto.setBounds(x+600,y,labelAncho,50);
         panelInformacion.add(botonBorrarContacto);
         botonBorrarContacto.addActionListener(this);
-
+        
         contactos = dbc.getContactos();
         Object[][] data = new Object[contactos.length][5];
         for (int c=0;c<contactos.length;c++){
@@ -164,16 +199,119 @@ public class FormAgenda implements ActionListener{
         data[c][2]=contactos[c].getApellido();
         data[c][3]=contactos[c].getCelular();
         data[c][4]=contactos[c].getCorreo();
+                
+        /* PESTAÑA CITAS*/
+        citas = dbcitas.getCitas();
+        Object[][] datacitas = new Object[citas.length][5];         
+        for (int i=0;i<citas.length;i++){
+        datacitas[i][0]=citas[i].getId();
+        datacitas[i][1]=citas[i].getNombre();
+        datacitas[i][2]=citas[i].getLugar();
+        datacitas[i][3]=citas[i].getFecha2();
+        datacitas[i][4]=citas[i].getHora2();
+        
+        
+        y=5;
+        labelIdCita = new JLabel("Id");
+        labelIdCita.setBounds(x,y,20,20);
+        panelCitas.add(labelIdCita);
+        
+        textIdCita = new JTextField();
+        textIdCita.setBounds(x+30,y,50,20);
+        panelCitas.add(textIdCita);
+        
+        y+=30;
+        labelPersona = new JLabel("Persona",SwingConstants.RIGHT);
+        labelPersona.setBounds(x,y,labelAncho,labelAlto);
+        panelCitas.add(labelPersona);
+
+        textPersona = new JTextField();
+        textPersona.setBounds(x+160,y,textAncho,textAlto);
+        panelCitas.add(textPersona);
+        
+        labelLugar = new JLabel("Lugar",SwingConstants.RIGHT);
+        labelLugar.setBounds(x+350,y,labelAncho,labelAlto);
+        panelCitas.add(labelLugar);
+
+        textLugar = new JTextField();
+        textLugar.setBounds(x+510,y,textAncho,textAlto);
+        panelCitas.add(textLugar);
+        
+        y+=30;
+        
+        labelFecha = new JLabel("Fecha",SwingConstants.RIGHT);
+        labelFecha.setBounds(x,y,labelAncho,labelAlto);
+        panelCitas.add(labelFecha);
+
+        textFecha = new JTextField();
+        textFecha.setBounds(x+160,y,textAncho,textAlto);
+        panelCitas.add(textFecha);
+        
+        labelHora = new JLabel("Hora",SwingConstants.RIGHT);
+        labelHora.setBounds(x+350,y,labelAncho,labelAlto);
+        panelCitas.add(labelHora);
+
+        textHora = new JTextField();
+        textHora.setBounds(x+510,y,textAncho,textAlto);
+        panelCitas.add(textHora);
+        
+        y+=30;
+
+        labelDescripcion = new JLabel("Descripción",SwingConstants.RIGHT);
+        labelDescripcion.setBounds(x,y,labelAncho,labelAlto);
+        panelCitas.add(labelDescripcion);
+
+        textDescripcion = new JTextArea();
+        textDescripcion.setBounds(x+160,y,textAncho+350,textAlto+30);
+        panelCitas.add(textDescripcion);
+        
+        y+=80;
+        botonNuevaCita = new JButton("Nueva Cita");
+        botonNuevaCita.setBounds(x,y,labelAncho,50);
+        panelCitas.add(botonNuevaCita);
+        botonNuevaCita.addActionListener(this);
+
+        botonGuardarCita = new JButton("Guardar Cita");
+        botonGuardarCita.setBounds(x+200,y,labelAncho,50);
+        panelCitas.add(botonGuardarCita);
+        botonGuardarCita.addActionListener(this);
+        
+        botonEditarCita = new JButton("Editar Cita");
+        botonEditarCita.setBounds(x+400,y,labelAncho,50);
+        panelCitas.add(botonEditarCita);
+        botonEditarCita.addActionListener(this);
+
+        botonBorrarCita = new JButton("Borrar Cita");
+        botonBorrarCita.setBounds(x+600,y,labelAncho,50);
+        panelCitas.add(botonBorrarCita);
+        botonBorrarCita.addActionListener(this);
+
     }
 
+    /*Contactos*/
     String[] columNames = {"id","nombres","apellidos","celular","correo"};
-
+   
     modeloTabla= new DefaultTableModel(data, columNames);
 
     tablaContactos = new JTable(modeloTabla);
-    tablaContactos.setPreferredScrollableViewportSize(new Dimension(500, 150));
+    tablaContactos.setPreferredScrollableViewportSize(new Dimension(1500, 150));
 
     scrollPanel = new JScrollPane(tablaContactos);
+    
+    /*Citas*/
+    String[] columNamesCitas = {"id","Persona","Lugar","Fecha","Hora"};
+    
+    modeloTablaCita= new DefaultTableModel(datacitas, columNamesCitas);
+
+    tablaCitas = new JTable(modeloTablaCita);
+    tablaCitas.setPreferredScrollableViewportSize(new Dimension(500, 150));
+
+    scrollPanel = new JScrollPane(tablaCitas);
+    
+    
+    
+    
+    
 
     tablaContactos.addMouseListener(new MouseAdapter(){
         public void mouseClicked(MouseEvent e){
@@ -201,6 +339,37 @@ public class FormAgenda implements ActionListener{
         }
     });
 
+    /* Cita */
+    tablaCitas.addMouseListener(new MouseAdapter(){
+        public void mouseClicked(MouseEvent e){
+            fila = tablaCitas.rowAtPoint(e.getPoint());
+            int columna = tablaCitas.columnAtPoint(e.getPoint());
+            if ((fila > -1) && (columna > -1)){
+                textIdCita.setText(String.valueOf(tablaCitas.getValueAt(fila,0)));
+                for(int i=0;i<citas.length;i++){
+                    if(String.valueOf(citas[i].getId()).equals(
+                    String.valueOf(tablaCitas.getValueAt(fila, 0)))){
+                    textPersona.setText(citas[i].getNombre());
+                    textLugar.setText(citas[i].getLugar());
+                    /*textFecha.setText(citas[i].getFecha());
+                    textHora.setText(citas[i].getHora());*/
+                    
+                    textFecha.setText(citas[i].getFecha2());
+                    textHora.setText(citas[i].getHora2());
+                    
+                    textDescripcion.setText(citas[i].getDescripcion());
+                    
+                    }
+
+                }
+                estado_cita = 2;
+                alterarEstadoCita();
+            }   
+        }
+    });
+    
+    
+    
     frame.getContentPane().add(scrollPanel,BorderLayout.NORTH);
     frame.getContentPane().add(pestana,BorderLayout.CENTER);
 
@@ -215,6 +384,8 @@ public class FormAgenda implements ActionListener{
     alterarEstado();
     }
 
+    alterarEstadoCita();
+    }
     public void alterarEstado(){
         switch(this.estado){
             case 0://estado por defecto
@@ -279,7 +450,62 @@ public class FormAgenda implements ActionListener{
             break;
         }
     }
-
+    
+    /* Citas */
+    public void alterarEstadoCita(){
+        switch(this.estado_cita){
+            case 0://estado por defecto
+                botonNuevaCita.setEnabled(true);
+                botonBorrarCita.setEnabled(false);
+                botonEditarCita.setEnabled(false);
+                botonGuardarCita.setEnabled(false);
+                textIdCita.setEditable(false);
+                textPersona.setEditable(false);
+                textLugar.setEditable(false);
+                textFecha.setEditable(false);
+                textHora.setEditable(false);
+                textDescripcion.setEditable(false);
+                
+                break;
+            case 1://estado para un nuevo contacto
+                botonNuevaCita.setEnabled(false);
+                botonBorrarCita.setEnabled(false);
+                botonEditarCita.setEnabled(false);
+                botonGuardarCita.setEnabled(true);
+                textIdCita.setEditable(false);
+                textPersona.setEditable(true);
+                textLugar.setEditable(true);
+                textFecha.setEditable(true);
+                textHora.setEditable(true);
+                textDescripcion.setEditable(true);
+                break;
+            case 2://estado de carga de un contacto
+                botonNuevaCita.setEnabled(false);
+                botonBorrarCita.setEnabled(true);
+                botonEditarCita.setEnabled(true);
+                botonGuardarCita.setEnabled(false);
+                textIdCita.setEditable(false);
+                textPersona.setEditable(false);
+                textLugar.setEditable(false);
+                textFecha.setEditable(false);
+                textHora.setEditable(false);
+                textDescripcion.setEditable(false);
+                break;
+            case 3://estado para editar un contacto
+                botonNuevaCita.setEnabled(false);
+                botonBorrarCita.setEnabled(false);
+                botonEditarCita.setEnabled(false);
+                botonGuardarCita.setEnabled(true);
+                textIdCita.setEditable(false);
+                textPersona.setEditable(true);
+                textLugar.setEditable(true);
+                textFecha.setEditable(true);
+                textHora.setEditable(true);
+                textDescripcion.setEditable(true);
+            break;
+        }
+    }
+    
     public void limpiarCampos(){
         textId.setText("");
         textNombre.setText("");
@@ -292,16 +518,33 @@ public class FormAgenda implements ActionListener{
         textCelular.setText("");
     }
 
+    public void limpiarCamposCita(){
+        textIdCita.setText("");
+        textPersona.setText("");
+        textLugar.setText("");
+        textFecha.setText("");
+        textHora.setText("");
+        textDescripcion.setText("");        
+    }
+    
     public void actionPerformed(ActionEvent e) {
         String accion = e.getActionCommand();
         System.out.println(accion);
         if(accion.equals("Salir")){
             System.exit(-1);
-        }
+        }        
         if(accion.equals("Acerca de ...")){
             DialogAcerca a = new DialogAcerca(null,false);
             a.setVisible(true);
         }
+        
+        if(accion.equals("Contactos")){
+            PanelTablas(1);
+        } 
+        if(accion.equals("Citas")){
+            PanelTablas(2);
+        } 
+        
         if(accion.equals("Nuevo Contacto")){
             limpiarCampos();
             this.estado=1;
@@ -350,6 +593,75 @@ public class FormAgenda implements ActionListener{
         limpiarCampos();
         this.estado=0;
     }
+    
+    
+    /*Cita*/
+    if(accion.equals("Nueva Cita")){
+        limpiarCamposCita();
+        this.estado_cita=1;
+    }
+    if(accion.equals("Editar Cita")){
+        this.estado_cita=3;
+    }
+    if(accion.equals("Guardar Cita")){
+        if(this.estado_cita==1){
+            Citas cts = new Citas();
+            /*cts.setPersona(textPersona.getText());*/
+            cts.setLugar(textLugar.getText());
+            /*cts.setFecha(textFecha.getText());
+            cts.setHora(textHora.getText());*/
+            
+            cts.setFecha2(textFecha.getText());
+            cts.setHora2(textHora.getText());
+            
+            cts.setDescripcion(textDescripcion.getText());
+            int r = dbcitas.insertarCitas(cts);
+            if(r>0){
+                Object[] newRow={r,cts.getPersona(),cts.getLugar(),cts.getFecha(),cts.getHora(),cts.getDescripcion()};
+                modeloTablaCita.addRow(newRow);
+                JOptionPane.showMessageDialog(null, "Cita agregada");
+            }
+        }else if(this.estado_cita==3){ 
+            Citas cts = new Citas();
+            cts.setId(Integer.parseInt(textId.getText(),10));
+            cts.setNombre(textPersona.getText());
+            cts.setLugar(textLugar.getText());
+            /*cts.setFecha(textFecha.getText());
+            cts.setHora(textHora.getText());*/
+            cts.setFecha2(textFecha.getText());
+            cts.setHora2(textHora.getText());
+            cts.setDescripcion(textDescripcion.getText());
+            int r = dbcitas.actualizarCita(cts);
+            if(r>0){
+                modeloTablaCita.setValueAt(cts.getNombre(), fila, 1);
+                modeloTablaCita.setValueAt(cts.getLugar(), fila, 2);
+                modeloTablaCita.setValueAt(cts.getFecha(), fila, 3);
+                modeloTablaCita.setValueAt(cts.getHora(), fila, 4);
+                modeloTablaCita.setValueAt(cts.getDescripcion(), fila, 5);
+                JOptionPane.showMessageDialog(null, "Cita actualizada");
+            }
+        }
+        citas = dbcitas.getCitas();
+        limpiarCamposCita();
+        this.estado_cita=0;
+    }
+    /*---------------------------------------------------------------*/
+    /* cita */
+    if(accion.equals("Borrar Cita")){
+        Citas cts = new Citas();
+        cts.setId(Integer.parseInt(textIdCita.getText(),10));
+        int r = dbcitas.borrarCita(cts);
+        if(r>0){
+            modeloTablaCita.removeRow(fila);
+            JOptionPane.showMessageDialog(null, "Cita borrada");
+            limpiarCamposCita();
+        }
+        citas = dbcitas.getCitas();
+        this.estado_cita=0;
+    }
+    
+    /*---------------------------------------------------------------*/
+    
     if(accion.equals("Borrar Contacto")){
         Contacto c = new Contacto();
         c.setId(Integer.parseInt(textId.getText(),10));
@@ -363,5 +675,34 @@ public class FormAgenda implements ActionListener{
         this.estado=0;
     }
     alterarEstado();
+    alterarEstadoCita();    
+   } 
+    
+   public void PanelTablas(int i){
+       if(i==1){
+           contactos = dbc.getContactos();
+            Object[][] data = new Object[contactos.length][5];
+            for (int c=0;c<contactos.length;c++){
+                data[c][0]=contactos[c].getId();
+                data[c][1]=contactos[c].getNombre();
+                data[c][2]=contactos[c].getApellido();
+                data[c][3]=contactos[c].getCelular();
+                data[c][4]=contactos[c].getCorreo();
+            }
+       }else{
+            /* PESTAÑA CITAS*/
+            citas = dbcitas.getCitas();
+            Object[][] datacitas = new Object[citas.length][5];         
+            for (int j=0;j<citas.length;j++){
+                datacitas[j][0]=citas[j].getId();
+                datacitas[j][1]=citas[j].getPersona();
+                datacitas[j][2]=citas[j].getLugar();
+                datacitas[j][3]=citas[j].getFecha();
+                datacitas[j][4]=citas[j].getHora();
+                }
+            }
+       
+        }
+
     }
-}
+

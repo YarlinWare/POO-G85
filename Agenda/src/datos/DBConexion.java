@@ -2,7 +2,7 @@ package datos;
 
 import java.sql.*;
 public class DBConexion {
-    static String bd = "agenda";
+    static String bd = "agenda2";
     static String login = "root2";
     static String password = "mysql2018";
     static String url = "jdbc:mysql://localhost/"+bd;
