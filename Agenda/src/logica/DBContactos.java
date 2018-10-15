@@ -68,8 +68,8 @@ public class DBContactos {
             int resultado = 0;//no hubo errores de validacion
             try{
                 PreparedStatement pstm = cn.getConexion().prepareStatement("select count(1) as cont " +
-                " from contactos " +
-                " where con_correo = ? ");
+                                                                            " from contactos " +
+                                                                            " where con_correo = ? ");
                 pstm.setString(1, c.getCorreo());
                 ResultSet res = pstm.executeQuery();
                 res.next();

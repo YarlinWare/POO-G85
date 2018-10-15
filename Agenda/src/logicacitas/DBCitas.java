@@ -70,30 +70,31 @@ public class DBCitas {
         }
     
     public int insertarCitas(Citas c){
-        int cont_usuario = -1;
+        int cont_cita = -1;
         int resultado = 0;//no hubo errores de validacion
         try{
             PreparedStatement pstm = cn.getConexion().prepareStatement("select count(1) as cont " +
                                                                         " from citas " +
                                                                         " where cit_fecha = ? ");
-            pstm.setDate(1, c.getFecha());
+            //pstm.setDate(1, c.getFecha());
+            pstm.setInt(1, c.getId());
             ResultSet res = pstm.executeQuery();
             res.next();
-            cont_usuario = res.getInt("cont");
+            cont_cita = res.getInt("cont");
             res.close();
-            if(cont_usuario==0){
+            if(cont_cita==0){
                 pstm = cn.getConexion().prepareStatement("insert into citas (cit_id_contacto, " +
-                                                        " cit_fecha, " +
                                                         " cit_lugar, " +
+                                                        " cit_fecha, " +
                                                         " cit_hora," +
                                                         " cit_descripcion, " +
-                                                        " values(?,?,?,?,?,?)");
+                                                        " values(?,?,?,?,?)");
 
                 pstm.setInt(1, c.getPersona());
-                //pstm.setDate(2, c.getFecha2());
-                pstm.setString(3, c.getLugar());
+                //pstm.setDate(3, c.getFecha2());
+                pstm.setString(2, c.getLugar());
                // pstm.setTime(4, c.getHora2());
-                pstm.setString(2, c.getFecha2());
+                pstm.setString(3, c.getFecha2());
                 pstm.setString(4, c.getHora2());
                 pstm.setString(5, c.getDescripcion());
 
@@ -127,6 +128,8 @@ public class DBCitas {
                                                                     " ORDER BY cit_id");
             pstm.setInt(1, cts.getPersona());
             pstm.setString(2, cts.getLugar());
+            //pstm.setDate(3, cts.getFecha());
+            //pstm.setTime(4, cts.getHora());
             pstm.setString(3, cts.getFecha2());
             pstm.setString(4, cts.getHora2());
             pstm.setString(5, cts.getNombre());
@@ -143,7 +146,7 @@ public class DBCitas {
         int resultado = 0;
         try{
             PreparedStatement pstm = cn.getConexion().prepareStatement("delete from citas " +
-            " where con_id = ?");
+            " where cit_id = ?");
             pstm.setInt(1, c.getId());
             resultado = pstm.executeUpdate();
         }catch(SQLException e){
