@@ -10,7 +10,7 @@ Programación Orientada a Objetos Grupo 85
 - Cronómetro con interface.
 - Figuras Geométricas.
 - Agenda.
-
+- Colisión
 
 
  
