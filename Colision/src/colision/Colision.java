@@ -46,7 +46,7 @@ public class Colision extends JPanel {
             System.exit(ABORT);
         }
 	public static void main(String[] args) throws InterruptedException {
-		JFrame frame = new JFrame("Mini Tennis");
+		JFrame frame = new JFrame("Colision");
 		Colision game = new Colision();
 		frame.add(game);
 		frame.setSize(300, 400);
