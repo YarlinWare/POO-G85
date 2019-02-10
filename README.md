@@ -11,10 +11,10 @@ Programación Orientada a Objetos Grupo 85
 - Figuras Geométricas.
 - Agenda.
 - Colisión
-
+- Caracol (Efecto)
 
  
-Integrantes  | Codigo
+Integrantes  | Código
 ------------- | -------------
 Juan Felipe Herrera Poveda | 20181020077
 Cristhian Mauricio Yara Pardo  | 20181020081
