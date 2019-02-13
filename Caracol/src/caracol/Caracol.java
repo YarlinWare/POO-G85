@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package caracol;
+import Archivos.Archivos;
+import Logica.Recorrido;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,45 +20,16 @@ import javax.swing.JPanel;
  *
  * @author rapterpakfa
  */
-public class Caracol extends JPanel {
-        Rectangulo rect_1 = new Rectangulo(this);
-        
+public class Caracol extends JPanel {           
     /**
      * @param args the command line arguments
-     */
-    public Caracol() {
-        this.rect_1 = new Rectangulo(this);
-    }
+     */   
+    public static void main(String[] args) {
+        Recorrido rec = new Recorrido();
+        Archivos arch = new Archivos();
         
-    private void move() {
-            rect_1.move();
-    }
-    @Override
-    public void paint(Graphics g) {
-            //super.paint(g);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                            RenderingHints.VALUE_ANTIALIAS_ON);
-            rect_1.paint(g2d);
-    }
-
-    public void gameOver() {
-        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
-        System.exit(ABORT);
-    }
-    public static void main(String[] args) throws InterruptedException {
-            JFrame frame = new JFrame("Caracol");
-            Caracol game = new Caracol();
-            frame.add(game);
-            frame.setSize(300, 400);
-            frame.setVisible(true);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            while (true) {
-                game.move();
-                game.repaint();
-                Thread.sleep(10);
-            }
+        rec.imprimirMatriz(5);
+        arch.escribir(5);
     }
     
 }

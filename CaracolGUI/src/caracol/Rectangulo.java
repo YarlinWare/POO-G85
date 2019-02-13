@@ -21,6 +21,9 @@ public class Rectangulo {
 	int ya = 0;
 	private Caracol game;
         int conteo=0;
+        
+        Recorrido rec = new Recorrido();
+        
 	public Rectangulo(Caracol game) {
 		this.game= game;
 	}
@@ -50,8 +53,13 @@ public class Rectangulo {
             }
             x = x + xa;
             y = y + ya;
+            
 	}
-                
+         
+        public void move(int tamanio_matriz) {             
+            
+	}
+        
 	public void paint(Graphics2D g) {            
             g.setColor(Color.ORANGE);
             g.fillRect(x, y, WITH, HEIGHT);
