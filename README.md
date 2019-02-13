@@ -11,7 +11,8 @@ Programación Orientada a Objetos Grupo 85
 - Figuras Geométricas.
 - Agenda.
 - Colisión
-- Caracol (Efecto)
+- Matriz Caracol (Consola)
+- Matriz Caracol (Efecto opcional)
 
  
 Integrantes  | Código
