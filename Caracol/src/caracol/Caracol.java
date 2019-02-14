@@ -6,16 +6,9 @@
 package caracol;
 import Archivos.Archivos;
 import Logica.Recorrido;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.Ellipse2D;
-import static java.awt.image.ImageObserver.ABORT;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import java.io.IOException;
 import javax.swing.JPanel;
-
+import java.util.Scanner;
 /**
  *
  * @author rapterpakfa
@@ -24,12 +17,19 @@ public class Caracol extends JPanel {
     /**
      * @param args the command line arguments
      */   
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Recorrido rec = new Recorrido();
-        Archivos arch = new Archivos();
-        
-        rec.imprimirMatriz(5);
-        arch.escribir(5);
-    }
+        Archivos arch = new Archivos();  
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Introduzca Tamaño de la Matriz: \n");       
+        int tamanio = sc.nextInt(); 
+        /* Creando la matriz */ 
+        System.out.print("****** Método de creación de la matriz ******\n"); 
+        rec.imprimirMatriz(tamanio);
+        /* Creación y lectura archivo */
+        System.out.println("****** Lectura del Archivo ******\n"); 
+        arch.escribir(tamanio);
+        arch.leer();
+    }   
     
 }
